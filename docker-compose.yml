@@ -1,0 +1,30 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    cpus: 1
+    mem_limit: 4g
+    container_name: ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./ollama:/root/.ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+    command: serve
+
+  openwebui:
+    image: ghcr.io/open-webui/open-webui:latest
+    cpus: 1
+    mem_limit: 4g
+    container_name: openwebui
+    restart: unless-stopped
+    ports:
+      - "3000:8080"
+    environment:
+      # Point Open WebUI to the Ollama backend
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - CORS_ALLOW_ORIGIN=n28.ealamgroup.pk
+      - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY:-change_me}
+    depends_on:
+      - ollama
