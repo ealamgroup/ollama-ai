@@ -24,7 +24,7 @@ services:
     environment:
       # Point Open WebUI to the Ollama backend
       - OLLAMA_BASE_URL=http://ollama:11434
-      - CORS_ALLOW_ORIGIN=n28.ealamgroup.pk
+      - CORS_ALLOW_ORIGIN=https://n28.ealamgroup.pk
       - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY:-change_me}
     depends_on:
       - ollama
