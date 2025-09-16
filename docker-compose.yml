@@ -1,8 +1,8 @@
 services:
   ollama:
     image: ollama/ollama:latest
-    cpus: 1
-    mem_limit: 4g
+    cpus: 4
+    mem_limit: 16g
     container_name: ollama
     restart: unless-stopped
     ports:
